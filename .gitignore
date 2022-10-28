@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2022 Deminder <tremminder@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+/src/locale
+/src/schemas/gschemas.compiled
+target/
+*~
+*#
+*-gtk4.ui
+*.zip
+*.png
+*.mo
+*.env
+todo.md
+
+node_modules
+package-lock.json

@@ -1,0 +1,12 @@
+/*
+ * SPDX-FileCopyrightText: 2022 Deminder <tremminder@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+.number-label {
+  min-width: 32px;
+  font-family: monospace, monospace;
+  font-weight: bold;
+  font-size: larger;
+  text-align: right;
+}

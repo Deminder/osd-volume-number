@@ -1,0 +1,8 @@
+{
+  "name": "OSD Volume Number",
+  "description": "Replace the on-screen-display volume level icon with a number.",
+  "uuid": "osd-volume-number@deminder",
+  "url": "https://github.com/Deminder/osd-volume-number",
+  "shell-version": ["42", "43"],
+  "version": 0
+}
