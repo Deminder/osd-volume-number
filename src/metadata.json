@@ -4,5 +4,5 @@
   "uuid": "osd-volume-number@deminder",
   "url": "https://github.com/Deminder/osd-volume-number",
   "shell-version": ["42", "43"],
-  "version": 0
+  "version": 1
 }
