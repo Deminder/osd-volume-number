@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the osd-volume-number package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: osd-volume-number v1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-30 22:14+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/prefs.js:36 src/prefs.js:44
+msgid "Left"
+msgstr ""
+
+#: src/prefs.js:37 src/prefs.js:45
+msgid "Right"
+msgstr ""
+
+#: src/prefs.js:38 src/prefs.js:43
+msgid "Hidden"
+msgstr ""
+
+#: src/prefs.js:40
+msgid "Number position"
+msgstr ""
+
+#: src/prefs.js:47
+msgid "Icon position"
+msgstr ""
+
+#: src/schemas/org.gnome.shell.extensions.osd-volume-number.gschema.xml:13
+msgid "Position of OSD number if a level is shown (left, right, hidden)"
+msgstr ""
+
+#: src/schemas/org.gnome.shell.extensions.osd-volume-number.gschema.xml:18
+msgid "Position of OSD icon if a level is shown (left, right, hidden)"
+msgstr ""

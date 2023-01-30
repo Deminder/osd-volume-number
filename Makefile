@@ -13,6 +13,7 @@ all: $(ZIP_FILE) $(DEBUG_ZIP)
 $(ZIP_FILE): $(SOURCE_FILES)
 	@mkdir -p target
 	gnome-extensions pack src \
+		--podir "../po" \
 		--force \
 		--out-dir="target"
 zip: $(ZIP_FILE)
