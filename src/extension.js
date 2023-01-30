@@ -73,7 +73,12 @@ class Extension {
           this._updateVisible.bind(this)
         );
         w._icon_right = new St.Icon({ y_expand: true });
-        w._icon.bind_property('gicon', w._icon_right, 'gicon', GObject.BindingFlags.SYNC_CREATE);
+        w._icon.bind_property(
+          'gicon',
+          w._icon_right,
+          'gicon',
+          GObject.BindingFlags.SYNC_CREATE
+        );
 
         const b = w._hbox;
         b.remove_all_children();

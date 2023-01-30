@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Deminder <tremminder@gmail.com>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # OSD Volume Number
 
 Replace the on-screen-display volume level icon with a number.
