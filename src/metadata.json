@@ -1,5 +1,7 @@
 {
   "name": "OSD Volume Number",
+  "gettext-domain": "osd-volume-number",
+  "settings-schema": "org.gnome.shell.extensions.osd-volume-number",
   "description": "Replace the on-screen-display volume level icon with a number.",
   "uuid": "osd-volume-number@deminder",
   "url": "https://github.com/Deminder/osd-volume-number",

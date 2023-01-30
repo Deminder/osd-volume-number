@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Deminder <tremminder@gmail.com>
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
+<schemalist gettext-domain="osd-volume-number">
+  <schema path="/org/gnome/shell/extensions/osd-volume-number/" id="org.gnome.shell.extensions.osd-volume-number">
+    <key type="s" name="number-position">
+      <default>"left"</default>
+      <summary>Position of OSD number if a level is shown (left, right, hidden)</summary>
+    </key>
+
+    <key type="s" name="icon-position">
+      <default>"hidden"</default>
+      <summary>Position of OSD icon if a level is shown (left, right, hidden)</summary>
+    </key>
+  </schema>
+</schemalist>

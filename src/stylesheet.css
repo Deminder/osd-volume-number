@@ -4,9 +4,12 @@
  */
 
 .number-label {
-  min-width: 32px;
-  font-family: monospace, monospace;
+  min-width: 33px;
+  font-family: 'Noto Sans Mono';
   font-weight: bold;
-  font-size: larger;
+  font-size: 20px;
   text-align: right;
 }
+
+.number-label-left {}
+.number-label-right {}
