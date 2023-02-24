@@ -8,7 +8,7 @@ SOURCE_FILES := $(shell find src -type f)
 
 ZIP_FILE := target/$(UUID).shell-extension.zip
 
-all: $(ZIP_FILE) $(DEBUG_ZIP)
+all: $(ZIP_FILE)
 
 $(ZIP_FILE): $(SOURCE_FILES)
 	@mkdir -p target

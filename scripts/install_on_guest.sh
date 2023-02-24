@@ -19,7 +19,6 @@ if [ -z "$SSHADDR" ]; then
     exit 1
 fi
 
-# build with debugMode enabled
 make zip
 UUID=$(grep uuid src/metadata.json | cut -d\" -f 4)
 ZIPFILE="$UUID".shell-extension.zip
