@@ -26,7 +26,7 @@ _A clear and concise description of what you expected to happen._
 _If applicable, add screenshots to help explain your problem._
 
 **System**
-- Extension version: `gnome-extensions info osd-volume-number@Deminder | grep -i version`
+- Extension version: `gnome-extensions info osd-volume-number@deminder | grep -i version`
 - GNOME shell version: `gnome-shell --version`
 - Distro: _Ubuntu 22.04, Fedora 37, etc._
 
