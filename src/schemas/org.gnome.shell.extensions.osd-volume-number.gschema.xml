@@ -17,5 +17,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
       <default>"hidden"</default>
       <summary>Position of OSD icon if a level is shown (left, right, hidden)</summary>
     </key>
+
+    <key type="b" name="adapt-panel-menu">
+      <default>false</default>
+      <summary>Adapt the audio I/O volume sliders in the panel menu</summary>
+    </key>
   </schema>
 </schemalist>

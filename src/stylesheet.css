@@ -5,14 +5,16 @@
 
 .number-label {
   min-width: 33px;
-  /*font-family: 'Noto Sans Mono';*/
   font-family: 'Droid Sans Mono';
   font-weight: bold;
   font-size: 20px;
   text-align: right;
 }
 
-.number-label-left {
-}
-.number-label-right {
+.menu-number-label {
+  min-width: 24px;
+  font-family: 'Droid Sans Mono';
+  font-weight: bold;
+  font-size: 14px;
+  text-align: right;
 }

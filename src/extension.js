@@ -8,20 +8,173 @@ const Main = imports.ui.main;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 
+class SliderNumberPatch {
+  constructor(widget) {
+    this.widget = widget;
+    this._settings = ExtensionUtils.getSettings();
+
+    this.numlabel = new St.Label({
+      y_expand: true,
+      y_align: Clutter.ActorAlign.CENTER,
+      style_class: this.styleClass,
+    });
+    this.slider.bind_property_full(
+      'value',
+      this.numlabel,
+      'text',
+      GObject.BindingFlags.SYNC_CREATE,
+      (__, v) => [true, (v * 100).toFixed()],
+      null
+    );
+    this._sliderVisibleSignalId = this.slider.connect(
+      'notify::visible',
+      this._sync.bind(this)
+    );
+
+    this._settingsIds = ['number-position', 'icon-position'].map(prop =>
+      this._settings.connect(`changed::${prop}`, this._sync.bind(this))
+    );
+    this._sync();
+  }
+
+  get styleClass() {
+    return 'number-label';
+  }
+
+  get icon() {
+    return this.widget._icon;
+  }
+
+  get slider() {
+    return this.widget._level;
+  }
+
+  get box() {
+    return this.widget._hbox;
+  }
+
+  get sliderContainer() {
+    return this.widget._vbox;
+  }
+
+  get iconContainer() {
+    return this.icon;
+  }
+
+  _updateSliderSibling(sibling, position) {
+    const parent = sibling.get_parent();
+    if (parent !== null) {
+      parent.remove_child(sibling);
+    }
+    this.box[
+      position === 'right' ? 'insert_child_above' : 'insert_child_below'
+    ](sibling, this.sliderContainer);
+    sibling.visible = position !== 'hidden';
+  }
+
+  _sync() {
+    this._updateSliderSibling(
+      this.iconContainer,
+      this.slider.visible ? this._settings.get_string('icon-position') : 'left'
+    );
+    this._updateSliderSibling(
+      this.numlabel,
+      this.slider.visible
+        ? this._settings.get_string('number-position')
+        : 'hidden'
+    );
+  }
+
+  unpatch() {
+    for (const sid of this._settingsIds) {
+      this._settings.disconnect(sid);
+    }
+    this._settingsIds = null;
+    this.slider.disconnect(this._sliderVisibleSignalId);
+    this.numlabel.destroy();
+    this.box.remove_child(this.iconContainer);
+    this.box.insert_child_below(this.iconContainer, this.sliderContainer);
+    this.iconContainer.visible = true;
+  }
+}
+
+class QuickSettingsSliderNumberPatch extends SliderNumberPatch {
+  get styleClass() {
+    return 'menu-number-label';
+  }
+
+  get slider() {
+    return this.widget.slider;
+  }
+
+  get box() {
+    return this.widget.get_child();
+  }
+
+  get sliderContainer() {
+    return this.slider.get_parent();
+  }
+
+  get iconContainer() {
+    return this.widget._iconButton;
+  }
+
+  resetIconReplacement() {
+    if (this.iconContainerBinding) {
+      this.iconContainerBinding.unbind();
+      this.iconContainerBinding = null;
+      this.iconContainer.label = null;
+    }
+    if (this.iconStyleClass) {
+      this.iconContainer.styleClass = this.iconStyleClass;
+      this.iconStyleClass = null;
+    }
+    this.iconContainer.child = this.icon;
+  }
+
+  _sync() {
+    this.resetIconReplacement();
+    super._sync();
+    if (!this.iconContainer.visible && this.numlabel.visible) {
+      // Enable mute toggling via number if icon is not shown
+      this.iconStyleClass = this.iconContainer.styleClass;
+      this.iconContainer.styleClass = `${this.iconStyleClass} menu-number-label`;
+      this.box.remove_child(this.iconContainer);
+      this.box.replace_child(this.numlabel, this.iconContainer);
+      this.iconContainerBinding = this.numlabel.bind_property(
+        'text',
+        this.iconContainer,
+        'label',
+        GObject.BindingFlags.SYNC_CREATE
+      );
+      this.iconContainer.visible = true;
+    }
+  }
+
+  unpatch() {
+    this.resetIconReplacement();
+    super.unpatch();
+  }
+}
+
 class Extension {
   constructor() {
+    this.settings = null;
     ExtensionUtils.initTranslations();
   }
 
   enable() {
+    if (this.settings !== null) return;
+    this.settings = ExtensionUtils.getSettings();
+    this.settingsId = this.settings.connect(
+      'changed::adapt-panel-menu',
+      this._repatch.bind(this)
+    );
     this.sid = Main.layoutManager.connect(
       'monitors-changed',
       this._repatch.bind(this)
     );
-    this._settings = ExtensionUtils.getSettings();
-    this._updateSignalIds = ['number-position', 'icon-position'].map(prop =>
-      this._settings.connect(`changed::${prop}`, this._updateVisible.bind(this))
-    );
+    this.patches = [];
     this._patch();
   }
 
@@ -30,87 +183,29 @@ class Extension {
     this._patch();
   }
 
-  _updateVisible() {
-    for (const w of this.osdWindows) {
-      if ('_numlabel_left' in w) {
-        const levelVis = w._level.visible;
-        const numberPos = levelVis
-          ? this._settings.get_string('number-position')
-          : 'hidden';
-        const iconPos = levelVis
-          ? this._settings.get_string('icon-position')
-          : 'left';
-        w._numlabel_left.visible = numberPos === 'left';
-        w._numlabel_right.visible = numberPos === 'right';
-        w._icon.visible = iconPos === 'left';
-        w._icon_right.visible = iconPos === 'right';
-      }
-    }
-  }
-
   _patch() {
-    // patching children in js/ui/osdWindow.js::OsdWindow
-    for (const w of this.osdWindows) {
-      if (!('_numlabel_left' in w)) {
-        for (const side of ['left', 'right']) {
-          const numlabel = new St.Label({
-            y_expand: true,
-            y_align: Clutter.ActorAlign.CENTER,
-            style_class: `number-label number-label-${side}`,
-          });
-          w._level.bind_property_full(
-            'value',
-            numlabel,
-            'text',
-            GObject.BindingFlags.SYNC_CREATE,
-            (__, v) => [true, (v * 100).toFixed()],
-            null
-          );
-          w[`_numlabel_${side}`] = numlabel;
-        }
-        w._levelSignalId = w._level.connect(
-          'notify::visible',
-          this._updateVisible.bind(this)
-        );
-        w._icon_right = new St.Icon({ y_expand: true });
-        w._icon.bind_property(
-          'gicon',
-          w._icon_right,
-          'gicon',
-          GObject.BindingFlags.SYNC_CREATE
-        );
-
-        const b = w._hbox;
-        b.remove_all_children();
-        b.add_child(w._icon);
-        b.add_child(w._numlabel_left);
-        b.add_child(w._vbox);
-        b.add_child(w._numlabel_right);
-        b.add_child(w._icon_right);
-      }
-    }
-    this._updateVisible();
+    // Patch children in js/ui/osdWindow.js::OsdWindow
+    // and panel menu input/output volume slider in js/ui/quickSettings.js::QuickSlider
+    this.patches = this.osdWindows
+      .map(w => new SliderNumberPatch(w))
+      .concat(
+        (this.settings.get_boolean('adapt-panel-menu')
+          ? ['_input', '_output']
+          : []
+        ).map(
+          sliderName =>
+            new QuickSettingsSliderNumberPatch(
+              Main.panel.statusArea.quickSettings._volume[sliderName]
+            )
+        )
+      );
   }
 
   _unpatch() {
-    for (const w of this.osdWindows) {
-      if ('_numlabel_left' in w) {
-        w._numlabel_left.destroy();
-        delete w['_numlabel_left'];
-        w._numlabel_right.destroy();
-        delete w['_numlabel_right'];
-        w._icon_right.destroy();
-        delete w['_icon_right'];
-
-        w._level.disconnect(w._levelSignalId);
-        delete w['_levelSignalId'];
-
-        w._icon.visible = true;
-        w._hbox.remove_all_children();
-        w._hbox.add_child(w._icon);
-        w._hbox.add_child(w._vbox);
-      }
+    for (const p of this.patches) {
+      p.unpatch();
     }
+    this.patches = [];
   }
 
   get osdWindows() {
@@ -118,17 +213,12 @@ class Extension {
   }
 
   disable() {
-    if (this.sid) {
-      Main.layoutManager.disconnect(this.sid);
-    }
+    if (this.settings === null) return;
+    this.settings.disconnect(this.settingsId);
+    this.settings = null;
+    this.settingsId = null;
+    Main.layoutManager.disconnect(this.sid);
     this.sid = null;
-    if (this._settingsIds) {
-      for (const sid of this._settingsIds) {
-        this._settings.disconnect(sid);
-      }
-      this._settingsIds = null;
-    }
-    this._settings = null;
     this._unpatch();
   }
 }
