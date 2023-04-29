@@ -4,7 +4,7 @@
 UUID := $(shell grep uuid src/metadata.json | cut -d\" -f 4)
 $(info Version: $(shell grep -oP '^ *?\"version\": *?\K(\d+)' src/metadata.json) ($(UUID)))
 
-SOURCE_FILES := $(shell find src -type f)
+SOURCE_FILES := po/*.po $(shell find src -type f)
 
 ZIP_FILE := target/$(UUID).shell-extension.zip
 

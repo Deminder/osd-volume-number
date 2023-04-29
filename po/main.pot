@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: osd-volume-number v1\n"
+"Project-Id-Version: osd-volume-number v3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-30 22:56+0100\n"
+"POT-Creation-Date: 2023-04-29 18:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/prefs.js:36 src/prefs.js:44
+#: src/prefs.js:44 src/prefs.js:52
 msgid "Left"
 msgstr ""
 
-#: src/prefs.js:37 src/prefs.js:45
+#: src/prefs.js:45 src/prefs.js:53
 msgid "Right"
 msgstr ""
 
-#: src/prefs.js:38 src/prefs.js:43
+#: src/prefs.js:46 src/prefs.js:51
 msgid "Hidden"
 msgstr ""
 
-#: src/prefs.js:40
+#: src/prefs.js:48
 msgid "Number position"
 msgstr ""
 
-#: src/prefs.js:47
+#: src/prefs.js:55
 msgid "Icon position"
+msgstr ""
+
+#: src/prefs.js:57
+msgid "Adapt panel menu slider"
 msgstr ""
 
 #: src/schemas/org.gnome.shell.extensions.osd-volume-number.gschema.xml:13
@@ -43,4 +47,8 @@ msgstr ""
 
 #: src/schemas/org.gnome.shell.extensions.osd-volume-number.gschema.xml:18
 msgid "Position of OSD icon if a level is shown (left, right, hidden)"
+msgstr ""
+
+#: src/schemas/org.gnome.shell.extensions.osd-volume-number.gschema.xml:23
+msgid "Adapt the audio I/O volume sliders in the panel menu"
 msgstr ""

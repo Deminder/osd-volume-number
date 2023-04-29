@@ -5,7 +5,7 @@ const { Adw, Gio, Gtk } = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const Gettext = imports.gettext.domain('battery-indicator-icon');
+const Gettext = imports.gettext.domain('osd-volume-number');
 const _ = Gettext.gettext;
 
 function init() {
