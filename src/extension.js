@@ -159,12 +159,10 @@ class QuickSettingsSliderNumberPatch extends SliderNumberPatch {
 
 class Extension {
   constructor() {
-    this.settings = null;
     ExtensionUtils.initTranslations();
   }
 
   enable() {
-    if (this.settings !== null) return;
     this.settings = ExtensionUtils.getSettings();
     this.settingsId = this.settings.connect(
       'changed::adapt-panel-menu',
@@ -213,7 +211,6 @@ class Extension {
   }
 
   disable() {
-    if (this.settings === null) return;
     this.settings.disconnect(this.settingsId);
     this.settings = null;
     this.settingsId = null;
