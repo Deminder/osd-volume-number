@@ -5,6 +5,8 @@ const { Adw, Gio, Gtk } = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
+const { PACKAGE_VERSION } = imports.misc.config;
+const MAJOR = Number.parseInt(PACKAGE_VERSION);
 const Gettext = imports.gettext.domain('osd-volume-number');
 const _ = Gettext.gettext;
 
@@ -93,7 +95,7 @@ function fillPreferencesWindow(window) {
 
   group.add(numberPosRow);
   group.add(iconPosRow);
-  group.add(adaptPanelMenuRow);
+  if (MAJOR >= 44) group.add(adaptPanelMenuRow);
   page.connect('destroy', () => {
     for (const hid of handlerIds) {
       settings.disconnect(hid);
@@ -101,6 +103,6 @@ function fillPreferencesWindow(window) {
   });
 
   window.default_width = 500;
-  window.default_height = 260;
+  window.default_height = 220 + 40 * (MAJOR >= 44);
   window.add(page);
 }

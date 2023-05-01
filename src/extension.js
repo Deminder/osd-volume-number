@@ -7,6 +7,8 @@ const Main = imports.ui.main;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
+const { PACKAGE_VERSION } = imports.misc.config;
+const MAJOR = Number.parseInt(PACKAGE_VERSION);
 
 class SliderNumberPatch {
   constructor(widget) {
@@ -187,7 +189,7 @@ class Extension {
     this.patches = this.osdWindows
       .map(w => new SliderNumberPatch(w))
       .concat(
-        (this.settings.get_boolean('adapt-panel-menu')
+        (this.settings.get_boolean('adapt-panel-menu') && MAJOR >= 44
           ? ['_input', '_output']
           : []
         ).map(
