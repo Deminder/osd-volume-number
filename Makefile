@@ -1,31 +1,29 @@
-# SPDX-FileCopyrightText: 2022 Deminder <tremminder@gmail.com>
+# SPDX-FileCopyrightText: 2023 Deminder <tremminder@gmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-UUID := $(shell grep uuid src/metadata.json | cut -d\" -f 4)
-$(info Version: $(shell grep -oP '^ *?\"version\": *?\K(\d+)' src/metadata.json) ($(UUID)))
+ifeq ($(wildcard sdt/build),)
+$(info Not initialized! Try running:)
+$(info > git submodule update --init --remote --recursive --checkout sdt)
+$(info )
+$(info )
+endif
 
-SOURCE_FILES := po/*.po $(shell find src -type f)
+include sdt/build/default.mk
 
-ZIP_FILE := target/$(UUID).shell-extension.zip
+SDT_MODULES := util injection
+SDT_DIR := $(SRC_DIR)/modules/sdt
+SDT_FILES := $(patsubst %,$(SDT_DIR)/%.js,$(SDT_MODULES))
 
-all: $(ZIP_FILE)
+SOURCE_FILES += $(SDT_FILES)
+DEBUGMODE_MODULE := $(SDT_DIR)/util.js
 
-$(ZIP_FILE): $(SOURCE_FILES)
-	@mkdir -p target
-	gnome-extensions pack src \
-		--podir "../po" \
-		--force \
-		--out-dir="target"
-zip: $(ZIP_FILE)
+$(SDT_FILES): $(SDT_DIR)/%.js: sdt/src/modules/%.js
+	@mkdir -p $(@D)
+	@cp $< $@
 
-lint:
-	npm run lint
-	npm run prettier
+include sdt/build/gnome-extension.mk
 
-install: $(ZIP_FILE)
-	gnome-extensions install --force $(ZIP_FILE)
+distclean: clean
+	-rm -r $(SDT_DIR)
 
-clean:
-	-rm -rf target
-
-.PHONY: install clean lint zip
+.PHONY: distclean test

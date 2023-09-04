@@ -2,10 +2,15 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+src/locale
 target/
 *~
 *.png
 *.env
+*.compiled
+debug-guest.sh
 
 node_modules
 package-lock.json
+
+src/modules/sdt
