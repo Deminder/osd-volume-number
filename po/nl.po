@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osd-volume-number v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 18:51+0200\n"
+"POT-Creation-Date: 2023-09-11 17:35+0200\n"
 "PO-Revision-Date: 2023-01-31 14:23+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.1\n"
 
-#: src/prefs.js:44 src/prefs.js:52
+#: src/prefs.js:50 src/prefs.js:61
 msgid "Left"
 msgstr "Links"
 
-#: src/prefs.js:45 src/prefs.js:53
+#: src/prefs.js:51 src/prefs.js:62
 msgid "Right"
 msgstr "Rechts"
 
-#: src/prefs.js:46 src/prefs.js:51
+#: src/prefs.js:52 src/prefs.js:60
 msgid "Hidden"
 msgstr "Verborgen"
 
-#: src/prefs.js:48
+#: src/prefs.js:55
 msgid "Number position"
 msgstr "Getallocatie"
 
-#: src/prefs.js:55
+#: src/prefs.js:64
 msgid "Icon position"
 msgstr "Pictogramlocatie"
 
-#: src/prefs.js:57
+#: src/prefs.js:67
 msgid "Adapt panel menu slider"
 msgstr ""
 
