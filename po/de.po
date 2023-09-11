@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 18:51+0200\n"
+"POT-Creation-Date: 2023-09-11 17:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,27 +12,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: src/prefs.js:44 src/prefs.js:52
+#: src/prefs.js:50 src/prefs.js:61
 msgid "Left"
 msgstr "Links"
 
-#: src/prefs.js:45 src/prefs.js:53
+#: src/prefs.js:51 src/prefs.js:62
 msgid "Right"
 msgstr "Rechts"
 
-#: src/prefs.js:46 src/prefs.js:51
+#: src/prefs.js:52 src/prefs.js:60
 msgid "Hidden"
 msgstr "Unsichtbar"
 
-#: src/prefs.js:48
+#: src/prefs.js:55
 msgid "Number position"
 msgstr "Zahlposition"
 
-#: src/prefs.js:55
+#: src/prefs.js:64
 msgid "Icon position"
 msgstr "Icon-Position"
 
-#: src/prefs.js:57
+#: src/prefs.js:67
 msgid "Adapt panel menu slider"
 msgstr "Passe Lautstärkeregler im Menü an"
 
