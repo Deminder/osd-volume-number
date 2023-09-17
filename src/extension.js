@@ -10,8 +10,6 @@ import {
 } from './modules/slider.js';
 
 export default class OsdVolumeNumber extends Extension {
-  tracker = new InjectionTracker();
-
   enable() {
     this._settings = this.getSettings();
     this.settingsId = this._settings.connect(
@@ -32,6 +30,7 @@ export default class OsdVolumeNumber extends Extension {
   }
 
   _patch() {
+    this.tracker = new InjectionTracker();
     // Patch children in js/ui/osdWindow.js::OsdWindow
     // and panel menu input/output volume slider in js/ui/quickSettings.js::QuickSlider
     const qs = Main.panel.statusArea.quickSettings;
@@ -65,6 +64,7 @@ export default class OsdVolumeNumber extends Extension {
 
   _unpatch() {
     this.tracker.clearAll();
+    this.tracker = null;
     for (const p of this.patches) {
       p.unpatch();
     }
