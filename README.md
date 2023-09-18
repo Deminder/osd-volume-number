@@ -28,10 +28,10 @@ make install
 
 ### Debug
 
-Install on a virtual/remote host for debugging:
+Install via `$GUEST_SSHCMD` on a virtual/remote host `$GUEST_SSHADDR` for debugging:
 
 ```(shell)
-./scripts/install_on_guest.sh $GUEST_SSH_ADDRESS
+GUEST_SSHCMD=ssh GUEST_SSHADDR=guest@vm make debug-guest
 ```
 
 ### Update Translations
@@ -39,7 +39,7 @@ Install on a virtual/remote host for debugging:
 Extract transalable text from sources to template file `po/main.pot` and update `.po` files:
 
 ```(shell)
-./scripts/update-pod.sh
+make translations
 ```
 ### References
 
