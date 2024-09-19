@@ -5,6 +5,6 @@
   "description": "Replace the on-screen-display volume level icon with a number.",
   "uuid": "osd-volume-number@deminder",
   "url": "https://github.com/Deminder/osd-volume-number",
-  "shell-version": ["45", "46"],
+  "shell-version": ["45", "46", "47"],
   "version": 10
 }
