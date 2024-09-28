@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the OSD Volume Number package.
 # Jozef Gaál <preklady@mayday.sk>, 2024.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: OSD Volume Number 9\n"
