@@ -33,7 +33,10 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           draft: true
           generate_release_notes: true
-          files: target/osd-volume-number@deminder.shell-extension.zip
+          files: |
+            target/default/osd-volume-number@deminder.shell-extension.zip
