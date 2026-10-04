@@ -5,9 +5,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
 # OSD Volume Number
+
 Replace the on-screen-display volume level icon with a number.
 
-![number right](data/number_right.png)
+![number left](data/number_left.png)
 <a href="https://extensions.gnome.org/extension/5461/osd-volume-number">
 <img alt="Get it on GNOME Extensions" width="228" src="https://raw.githubusercontent.com/andyholmes/gnome-shell-extensions-badge/master/get-it-on-ego.svg?sanitize=true"></img>
 </a>
@@ -23,6 +24,7 @@ Requires `gnome-shell-extensions` and `gettext`:
 ```(shell)
 make install
 ```
+
 OR automatically switch to the last supported release version before install `make supported-install`.
 
 ## Development
@@ -42,6 +44,7 @@ Extract transalable text from sources to template file `po/main.pot` and update 
 ```(shell)
 make translations
 ```
+
 ### References
 
 - https://gjs.guide/extensions/
