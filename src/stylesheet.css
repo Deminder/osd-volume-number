@@ -4,8 +4,8 @@
  */
 
 .number-label {
-  min-width: 33px;
-  font-family: 'Droid Sans Mono';
+  min-width: 36px;
+  font-family: 'Adwaita Mono';
   font-weight: bold;
   font-size: 20px;
   text-align: right;
@@ -13,7 +13,7 @@
 
 .menu-number-label {
   min-width: 24px;
-  font-family: 'Droid Sans Mono';
+  font-family: 'Adwaita Mono';
   font-weight: bold;
   font-size: 14px;
   text-align: right;
